@@ -1,4 +1,5 @@
-﻿using CodingWiki_Model.Models;
+﻿using CodingWiki_DataAccess.FluentConfig;
+using CodingWiki_Model.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodingWiki_DataAccess.Data
@@ -11,6 +12,15 @@ namespace CodingWiki_DataAccess.Data
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<BookDetail> BookDetails { get; set; }
+        public DbSet<BookAuthorMap> BookAuthorMap { get; set; }
+
+
+        // rename to Fluent_BookDetails
+        public DbSet<Fluent_BookDetail> BookDetail_fluent { get; set; }
+        public DbSet<Fluent_Book> Book_fluent { get; set; }
+        public DbSet<Fluent_Publisher> Publisher_fluent { get; set; }
+        public DbSet<Fluent_Author> Author_fluent { get; set; }
+        public DbSet<Fluent_BookAuthorMap> BookAuthorMap_fluent { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
@@ -20,10 +30,11 @@ namespace CodingWiki_DataAccess.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             var bookList = new Book[]
             {
-                new Book { BookId = 1, Title = "Bible", ISBN = "133B12", Price = 10.5m, Publisher_Id=1 },
-                new Book { BookId = 2, Title = "ABC", ISBN = "133B15", Price = 9.5m, Publisher_Id=1 }
+                new Book { Book_Id = 1, Title = "Bible", ISBN = "133B12", Price = 10.5m, Publisher_Id=1 },
+                new Book { Book_Id = 2, Title = "ABC", ISBN = "133B15", Price = 9.5m, Publisher_Id=1 }
             };
 
             var publisherList = new Publisher[]
@@ -35,6 +46,14 @@ namespace CodingWiki_DataAccess.Data
             modelBuilder.Entity<BookAuthorMap>().HasKey(u => new {u.Book_Id, u.Author_Id });
             modelBuilder.Entity<Book>().HasData(bookList);
             modelBuilder.Entity<Publisher>().HasData(publisherList);
+
+            // For Fluent Tables
+            modelBuilder.ApplyConfiguration(new FluentAuthorConfig());
+            modelBuilder.ApplyConfiguration(new FluentBookAuthorMapConfig());
+            modelBuilder.ApplyConfiguration(new FluentBookConfig());
+            modelBuilder.ApplyConfiguration(new FluentBookDetailConfig());
+            modelBuilder.ApplyConfiguration(new FluentPublisherConfig());
+
         }
     }
 }
