@@ -1,6 +1,7 @@
 ﻿using CodingWiki_DataAccess.FluentConfig;
 using CodingWiki_Model.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace CodingWiki_DataAccess.Data
 {
@@ -25,7 +26,8 @@ namespace CodingWiki_DataAccess.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlServer("Server=WAYNE\\SQLEXPRESS;Database=CodingWiki;TrustServerCertificate=True;Trusted_Connection=True;");
+            options.UseSqlServer("Server=WAYNE\\SQLEXPRESS;Database=CodingWiki;TrustServerCertificate=True;Trusted_Connection=True;")
+                .LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name },LogLevel.Information);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
