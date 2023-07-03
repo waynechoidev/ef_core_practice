@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingWiki_Web", "CodingWiki_Web\CodingWiki_Web.csproj", "{E6D3A649-8655-460C-B918-CFB14C3EEB8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingWiki_Web", "CodingWiki_Web\CodingWiki_Web.csproj", "{E6D3A649-8655-460C-B918-CFB14C3EEB8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingWiki_DataAccess", "CodingWiki_DataAccess\CodingWiki_DataAccess.csproj", "{48ADE51D-DBC1-4C0C-B625-31391093BC8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingWiki_DataAccess", "CodingWiki_DataAccess\CodingWiki_DataAccess.csproj", "{48ADE51D-DBC1-4C0C-B625-31391093BC8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingWiki_Model", "CodingWiki_Model\CodingWiki_Model.csproj", "{F8099760-2286-48F0-80EE-09D7639B87C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingWiki_Model", "CodingWiki_Model\CodingWiki_Model.csproj", "{F8099760-2286-48F0-80EE-09D7639B87C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingWiki_Console", "CodingWiki_Console\CodingWiki_Console.csproj", "{82F8935E-543D-41F7-A19D-1367DF4260CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingWiki_Console", "CodingWiki_Console\CodingWiki_Console.csproj", "{82F8935E-543D-41F7-A19D-1367DF4260CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

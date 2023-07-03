@@ -11,7 +11,7 @@ namespace CodingWiki_Model.Models
     public class Category
     {
         public int CategoryId { get; set; }
-        [Column("name")]
+        [Column("Name")]
         public string CategoryName { get; set; }
         //public int DisplayOrder { get; set; }
     }

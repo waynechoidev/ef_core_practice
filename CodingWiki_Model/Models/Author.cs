@@ -20,7 +20,7 @@ namespace CodingWiki_Model.Models
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public string Location { get; set; }
-        public List<BookAuthorMap> BookAuthorMap { get; set; }
+        public List<BookAuthor> BookAuthorMap { get; set; }
 
         [NotMapped]
         public string FullName {
@@ -29,5 +29,7 @@ namespace CodingWiki_Model.Models
                 return $"{FirstName} {LastName}";
             }
         }
+
+
     }
 }

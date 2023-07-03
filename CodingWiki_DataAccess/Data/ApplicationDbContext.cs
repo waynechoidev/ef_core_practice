@@ -13,7 +13,7 @@ namespace CodingWiki_DataAccess.Data
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<BookDetail> BookDetails { get; set; }
-        public DbSet<BookAuthorMap> BookAuthorMap { get; set; }
+        public DbSet<BookAuthor> BookAuthor { get; set; }
 
 
         // rename to Fluent_BookDetails
@@ -24,10 +24,16 @@ namespace CodingWiki_DataAccess.Data
         public DbSet<Fluent_BookAuthorMap> BookAuthorMap_fluent { get; set; }
 
 
+        public ApplicationDbContext (DbContextOptions<ApplicationDbContext> options): base(options)
+        {
+            
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlServer("Server=WAYNE\\SQLEXPRESS;Database=CodingWiki;TrustServerCertificate=True;Trusted_Connection=True;")
-                .LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name },LogLevel.Information);
+            // It is not used for Web app
+            //options.UseSqlServer("Server=WAYNE\\SQLEXPRESS;Database=CodingWiki;TrustServerCertificate=True;Trusted_Connection=True;")
+            //    .LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name },LogLevel.Information);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -45,7 +51,7 @@ namespace CodingWiki_DataAccess.Data
             };
 
             modelBuilder.Entity<Book>().Property(u => u.Price).HasPrecision(10, 5);
-            modelBuilder.Entity<BookAuthorMap>().HasKey(u => new {u.Book_Id, u.Author_Id });
+            modelBuilder.Entity<BookAuthor>().HasKey(u => new {u.Book_Id, u.Author_Id });
             modelBuilder.Entity<Book>().HasData(bookList);
             modelBuilder.Entity<Publisher>().HasData(publisherList);
 

@@ -4,6 +4,7 @@ using CodingWiki_DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodingWiki_DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230703121537_changeBookAuthorVM")]
+    partial class changeBookAuthorVM
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,9 +109,17 @@ namespace CodingWiki_DataAccess.Migrations
                     b.Property<int>("Author_Id")
                         .HasColumnType("int");
 
+                    b.Property<int?>("Author_Id1")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Book_Id1")
+                        .HasColumnType("int");
+
                     b.HasKey("Book_Id", "Author_Id");
 
-                    b.HasIndex("Author_Id");
+                    b.HasIndex("Author_Id1");
+
+                    b.HasIndex("Book_Id1");
 
                     b.ToTable("BookAuthor");
                 });
@@ -340,15 +351,11 @@ namespace CodingWiki_DataAccess.Migrations
                 {
                     b.HasOne("CodingWiki_Model.Models.Author", "Author")
                         .WithMany("BookAuthorMap")
-                        .HasForeignKey("Author_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Author_Id1");
 
                     b.HasOne("CodingWiki_Model.Models.Book", "Book")
                         .WithMany("BookAuthor")
-                        .HasForeignKey("Book_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Book_Id1");
 
                     b.Navigation("Author");
 

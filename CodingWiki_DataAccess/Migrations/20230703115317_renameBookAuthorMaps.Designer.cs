@@ -4,6 +4,7 @@ using CodingWiki_DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodingWiki_DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230703115317_renameBookAuthorMaps")]
+    partial class renameBookAuthorMaps
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,7 +101,7 @@ namespace CodingWiki_DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CodingWiki_Model.Models.BookAuthor", b =>
+            modelBuilder.Entity("CodingWiki_Model.Models.BookAuthorMaps", b =>
                 {
                     b.Property<int>("Book_Id")
                         .HasColumnType("int");
@@ -106,11 +109,19 @@ namespace CodingWiki_DataAccess.Migrations
                     b.Property<int>("Author_Id")
                         .HasColumnType("int");
 
+                    b.Property<int?>("Author_Id1")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Book_Id1")
+                        .HasColumnType("int");
+
                     b.HasKey("Book_Id", "Author_Id");
 
-                    b.HasIndex("Author_Id");
+                    b.HasIndex("Author_Id1");
 
-                    b.ToTable("BookAuthor");
+                    b.HasIndex("Book_Id1");
+
+                    b.ToTable("BookAuthorMaps");
                 });
 
             modelBuilder.Entity("CodingWiki_Model.Models.BookDetail", b =>
@@ -336,19 +347,15 @@ namespace CodingWiki_DataAccess.Migrations
                     b.Navigation("Publisher");
                 });
 
-            modelBuilder.Entity("CodingWiki_Model.Models.BookAuthor", b =>
+            modelBuilder.Entity("CodingWiki_Model.Models.BookAuthorMaps", b =>
                 {
                     b.HasOne("CodingWiki_Model.Models.Author", "Author")
                         .WithMany("BookAuthorMap")
-                        .HasForeignKey("Author_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Author_Id1");
 
                     b.HasOne("CodingWiki_Model.Models.Book", "Book")
-                        .WithMany("BookAuthor")
-                        .HasForeignKey("Book_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("BookAuthorMap")
+                        .HasForeignKey("Book_Id1");
 
                     b.Navigation("Author");
 
@@ -414,7 +421,7 @@ namespace CodingWiki_DataAccess.Migrations
 
             modelBuilder.Entity("CodingWiki_Model.Models.Book", b =>
                 {
-                    b.Navigation("BookAuthor");
+                    b.Navigation("BookAuthorMap");
 
                     b.Navigation("BookDetail");
                 });
